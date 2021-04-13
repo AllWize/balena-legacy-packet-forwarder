@@ -1,0 +1,31 @@
+FROM balenalib/%%BALENA_MACHINE_NAME%%-debian:buster-build as builder
+
+# Switch to working directory for our app
+WORKDIR /opt/ttn-gateway
+
+# Install build dependencies
+RUN install_packages automake libtool autoconf swig libftdi-dev libusb-1.0-0-dev
+
+# Copy all the source code in.
+COPY . ./
+
+# Compile our source code
+RUN ./build.sh
+
+FROM balenalib/%%BALENA_MACHINE_NAME%%-debian:buster
+
+WORKDIR /opt/ttn-gateway
+
+# Install dependencies
+RUN install_packages libftdi1 libusb-1.0-0
+
+COPY --from=builder /usr/local/lib/libmpsse.so /usr/lib/libmpsse.so
+COPY --from=builder /opt/ttn-gateway/packet_forwarder/poly_pkt_fwd/poly_pkt_fwd ./poly_pkt_fwd
+COPY --from=builder /opt/ttn-gateway/packet_forwarder/poly_pkt_fwd/global_conf.json ./global_conf.json
+COPY --from=builder /opt/ttn-gateway/lora_gateway/libloragw/test* ./
+COPY --from=builder /opt/ttn-gateway/lora_gateway/libloragw/99-libftdi.rules /etc/udev/rules.d/99-libftdi.rules
+
+COPY start.sh ./
+
+# Launch our binary on container startup.
+CMD ["bash", "start.sh"]

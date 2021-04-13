@@ -1,0 +1,20 @@
+name: 'LoRaWAN Legacy UDP PolyPacket Forwarder'
+description: 'Deploys a LoRaWAN Gateway using Legacy UDP PolyPacket Forwarder'
+type: 'sw.application'
+data:
+  applicationEnvironmentVariables:
+    - GATEWAY_RESET_GPIO: 25
+    - SERVERS: 'router.eu.thethings.network:1700'
+    - GATEWAY_EMAIL: 'yourname@yourdomain.com'
+    - GATEWAY_NAME: 'my-gateway'
+    - GATEWAY_GPS: false
+    - GATEWAY_LAT: 0
+    - GATEWAY_LON: 0
+    - GATEWAY_ALT: 0
+  defaultDeviceType: 'raspberry-pi3'
+  supportedDeviceTypes:
+    - 'raspberry-pi2'
+    - 'raspberry-pi3'
+    - 'raspberrypi3-64'
+    - 'raspberrypi4-64'
+    - 'fincm3'
