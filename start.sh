@@ -39,6 +39,7 @@ done
 echo -ne "\n\t\t],\n\t\t\"ref_latitude\": $GATEWAY_LAT,\n\t\t\"ref_longitude\": $GATEWAY_LON,\n\t\t\"ref_altitude\": $GATEWAY_ALT,\n\t\t\"contact_email\": \"$GATEWAY_EMAIL\",\n\t\t\"description\": \"$GATEWAY_NAME\" \n\t}\n}\n" >> $CONFIG_FILE
 
 # Reset Concentrator
+echo "Reseting concentrator using GPIO $GATEWAY_RESET_GPIO"
 echo "$GATEWAY_RESET_GPIO"  > /sys/class/gpio/export
 echo "out" > /sys/class/gpio/gpio$GATEWAY_RESET_GPIO/direction
 echo "0"   > /sys/class/gpio/gpio$GATEWAY_RESET_GPIO/value
