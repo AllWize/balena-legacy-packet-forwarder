@@ -1,3 +1,5 @@
+**THIS PROJECT IS NO LONGER MAINTAINED. Use this one instead: https://github.com/RAKWireless/udp-packet-forwarder**
+
 # LoRaWAN™ Legacy UDP PolyPacket Forwarder using balena.io with sx1301 LoRa concentrators
 
 This project deploys a LoRaWAN gateway using the legacy UDP Packet Forwarder protocol with balena. It runs on a Raspberry Pi (3/4) or balenaFin with a SX1301-based concentrator.
